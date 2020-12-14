@@ -1,0 +1,44 @@
+.toggle{
+    background: rgb(59, 59, 240);
+    height: 60px;
+    margin-bottom: 50px;
+}
+
+.toggle > a:link, .toggle > a:visited{
+    text-decoration: none;
+    color: white;
+    font-size: 25px;
+}
+
+.div-end > a:link, .div-end > a:visited{
+    text-decoration: none;
+    color:  rgb(59, 59, 240);
+    font-size: 12px;
+}
+
+.btn{
+    background: rgb(59, 59, 240);
+    border: none;
+    color: white;
+    width: 100%;
+    height: 35px;
+}
+
+.form-control{
+    width: 500px;
+}
+
+h1{
+    font-size: 35px;
+    font-family: fantasy;
+}
+
+@media screen and (max-width: 520px){
+    .resp{
+        width: 100%;
+    }
+    .form-control{
+        width: 100%;
+    }
+}
+

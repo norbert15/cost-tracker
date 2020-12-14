@@ -1,0 +1,48 @@
+.div-transport > button {
+  background: orange;
+}
+
+.div-food > button {
+  background: dodgerblue;
+}
+
+.div-shopping > button {
+  background: #98786c;
+}
+
+.div-gift > button {
+  background: #ea7070;
+}
+
+.div-health > button {
+  background: #77e70d;
+}
+
+.div-family > button {
+  background: mediumpurple;
+}
+
+.div-sport > button {
+  background: brown;
+}
+
+.div-payment > button {
+  background: lightseagreen;
+}
+
+.div-etc > button {
+  background: #ea7070;
+}
+
+button {
+  border-radius: 50% !important;
+  border: none;
+  height: 45px;
+  width: 50px;
+  color: white;
+  margin-top: 5px !important;
+}
+
+button[type="button"] {
+  outline: 0 !important;
+}

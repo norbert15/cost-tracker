@@ -1,0 +1,88 @@
+.toggle {
+  background: rgb(59, 59, 240);
+  display: flex;
+  justify-content:space-between;
+  height: 60px;
+  width: 100%;
+}
+
+.categoria {
+  color: white;
+  margin-left: -250px;
+}
+
+.categoria > a {
+  font-size: 16px;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.logout {
+  margin-top: 15px;
+  margin-right: 15px;
+  font-size: 20px;
+}
+
+.user {
+  margin-top: 12px;
+  margin-left: 10px;
+  color: white;
+  font-size: 20px;
+  display: inline-flex;
+}
+
+.user > i {
+  font-size: 35px;
+  margin-right: 10px;
+}
+
+.modal-header, .btn-close {
+  background-color: dodgerblue;
+  color: white;
+}
+
+a:link, a:visited {
+  text-decoration: none;
+  color: white;
+}
+
+a.disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+@media screen and (max-width: 955px) {
+  .user-name{
+    visibility: hidden;
+  }
+}
+
+@media screen and (max-width: 565px) {
+    .user-icon{
+        visibility: hidden;
+    }
+    .categoria{
+      margin-left: -240px;
+    }
+}
+
+@media screen and (max-width: 475px){
+  .toggle{
+    height: 80px;
+  }
+  .hide-first{
+    visibility: hidden;
+  }
+  .categoria{
+    margin-left: -238px;
+  }
+}
+
+@media screen and (max-width: 360px){
+  .hide-first{
+    visibility: visible;
+  }
+  .hide-last{
+    visibility: hidden;
+  }
+}
