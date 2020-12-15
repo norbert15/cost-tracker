@@ -51,7 +51,7 @@
                                 </div>
                                 <div class="alert alert-success p-1" id="success-name" hidden>Sikeres módosítás!</div>
                                 <div class="alert alert-danger p-1" id="error-name" hidden>Sikertelen módosítás!</div>
-                                <button type="button" class="btn btn-primary change-name d-flex justify-content-start">Módosítás</button>
+                                <button type="button" class="btn btn-primary change-name">Módosítás</button>
                             </form>    
                         </div>
                         <!--Adat rész vége-->
@@ -64,12 +64,17 @@
                                 <div class="form-group">
                                     <label for="email" class="form-label font-weight-bold">Régi Jelszó</label>
                                     <input type="password" class="form-control" id="old-password" placeholder="*******">
-                                    <div class="invalid-feedback">A jelszavak nem egyeznek!</div>
+                                    <div class="invalid-feedback">A jelszavak nem egyezik a régi jelszóval!</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="email" class="form-label font-weight-bold">Új Jelszó</label>
                                     <input type="password" class="form-control" id="new-password" placeholder="*******">
                                     <div class="invalid-feedback">A jelszónak legalább 5 karakternek kell lennie!</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email" class="form-label font-weight-bold">Új Jelszó Megerősítése</label>
+                                    <input type="password" class="form-control" id="new-password-confirm" placeholder="*******">
+                                    <div class="invalid-feedback">A jelszavak nem egyeznek meg!</div>
                                 </div>
                                 <div class="alert alert-success p-1" id="success-password" hidden>Sikeres módosítás!</div>
                                 <div class="alert alert-danger p-1" id="error-password" hidden>Sikertelen módosítás!</div>
@@ -86,7 +91,6 @@
                     </div>
                 </div>
             </div>
-            <!--<a href="logout.php">Beállítások</a>-->
         </div>
         <div></div>
     </div>

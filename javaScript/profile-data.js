@@ -2,6 +2,7 @@ $(document).ready(function(){
 
     $(".change-name").click(function(){
         var fullname = $("#fullname").val();
+        var success_alert = document.getElementById("success-name");
 
         if(fullname.length > 0){
             $.post('modify.php',
@@ -17,7 +18,7 @@ $(document).ready(function(){
                     $("#success-name").removeAttr("hidden");
                     $("#fullname").removeClass("is-invalid");
                     setTimeout(() => {
-                        $("#success-name").hide(1000);
+                        success_alert.setAttribute("hidden", "");
                     }, 2000);
                 }
             })
@@ -29,6 +30,8 @@ $(document).ready(function(){
     $(".change-password").click(function(){
         var old_password = $("#old-password").val();
         var new_password = $("#new-password").val();
+        var new_password_confirm = $("#new-password-confirm").val();
+        var success_alert = document.getElementById("success-password");
         var done = true;
 
         if(new_password.length < 5){
@@ -38,6 +41,14 @@ $(document).ready(function(){
         }else{
             $("#new-password").removeClass("is-invalid");
             $(".error").html("");
+            done = true;
+        }
+
+        if(new_password_confirm != new_password){
+            $("#new-password-confirm").addClass("is-invalid");
+            done = false;
+        }else{
+            $("#new-password-confirm").removeClass("is-invalid");
             done = true;
         }
 
@@ -58,7 +69,7 @@ $(document).ready(function(){
                     $("#succes-password").removeClass("text-danger");
                     $("#success-password").removeAttr("hidden");
                     setTimeout(() => {
-                        $("#success-password").hide(1000);
+                        success_alert.setAttribute("hidden", "");
                     }, 2000);
                 }
             })
@@ -70,6 +81,8 @@ $(document).ready(function(){
         $("#old-password").val("");
         $("#new-password").removeClass("is-invalid");
         $("#new-password").val("");
+        $("#new-password-confirm").removeClass("is-invalid");
+        $("#new-password-confirm").val("");
         $("#fullname").removeClass("is-invalid");
         $(".error").html("");
     })
