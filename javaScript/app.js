@@ -83,7 +83,7 @@ $(document).ready(function(){
         if(done){
             $.ajax({
                 type: "POST",
-                url: "..\\registration\\result.php",
+                url: "../registration/result.php",
                 data: {"name": name , "email": email, "password": password},
                 dataType: 'JSON',
                 success : function(feedback){
@@ -92,7 +92,7 @@ $(document).ready(function(){
                         $(".emailError").html(feedback.message);
                     }else if(feedback.status === "success"){
                         localStorage.setItem("success", "sikeres");
-                        window.location = "..\\login\\login-page.php";
+                        window.location = "../login/login-page.php";
                     }
                 }
             })
@@ -124,12 +124,12 @@ $(document).ready(function(){
         if(done){
             $.ajax({
                 type: "POST",
-                url: "..\\login\\result-login.php",
+                url: "../login/result-login.php",
                 data: {"email": email, "password": password},
                 dataType: 'JSON',
                 success : function(feedback){
                     if(feedback.status === "success"){
-                        window.location = "..\\profile\\profile.php";
+                        window.location = "../profile/profile.php";
                     }else if(feedback.status === "error"){
                         $(".error").addClass("is-invalid");
                         $(".allError").html(feedback.message);

@@ -94,6 +94,6 @@
         </div>
         <div></div>
     </div>
-    <script src="..\javaScript\change-month.js"></script>
-    <script src="..\javaScript\profile-data.js"></script>
+    <script src="../javaScript/change-month.js"></script>
+    <script src="../javaScript/profile-data.js"></script>
 

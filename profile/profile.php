@@ -2,12 +2,12 @@
 session_start();
 
 if (!isset($_SESSION["email"])) {
-    header("location: ..\login\login-page.php");
+    header("location: ../login/login-page.php");
 }
 $email = $_SESSION["email"];
 
-require_once '..\operationsPHP\connect.php';
-require_once '..\operationsPHP\expend-income.php';
+require_once '../operationsPHP/connect.php';
+require_once '../operationsPHP/expend-income.php';
 ?>
 
 <!DOCTYPE html>
@@ -15,14 +15,14 @@ require_once '..\operationsPHP\expend-income.php';
 
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>   
-    <script src="..\javaScript\add-exp-income.js"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <script src="../javaScript/add-exp-income.js"></script>
     <link rel="stylesheet" href="profile.css" />
-    <link rel="stylesheet" href="..\operationsPHP\toggle.css">
-    <link rel="stylesheet" href="..\global-icons.css" />
+    <link rel="stylesheet" href="../operationsPHP/toggle.css">
+    <link rel="stylesheet" href="../global-icons.css" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Költségkövető</title>
@@ -32,7 +32,7 @@ require_once '..\operationsPHP\expend-income.php';
     <div>
         <!--Toggle kezdés-->
         <div>
-            <?php require_once '..\operationsPHP\toggle-profile.php'; ?>
+            <?php require_once '../operationsPHP/toggle-profile.php'; ?>
         </div>
         <!--Toggle vége-->
         <!--Vissza jelzés-->

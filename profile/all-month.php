@@ -2,14 +2,14 @@
 session_start();
 
 if (!isset($_SESSION["email"])) {
-    header("location: ..\login\login-page.php");
+    header("location: ../login/login-page.php");
 }
 $email = $_SESSION["email"];
 
 if (isset($_SESSION["change"])) {
     $_SESSION["change"] = 0;
 }
-require_once '..\operationsPHP\connect.php';
+require_once '../operationsPHP/connect.php';
 
 //Jelenlegi dátum!
 $mydate = getdate(date("U"));
@@ -66,8 +66,8 @@ switch ($mydate['mon']) {
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    <link rel="stylesheet" href="..\profile\profile.css" />
-    <link rel="stylesheet" href="..\operationsPHP\toggle.css">
+    <link rel="stylesheet" href="../profile/profile.css" />
+    <link rel="stylesheet" href="../operationsPHP/toggle.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Költségkövető</title>
@@ -76,7 +76,7 @@ switch ($mydate['mon']) {
 <body>
     <!--Toggle kezdés-->
     <div>
-        <?php require_once '..\operationsPHP\toggle-profile.php'; ?>
+        <?php require_once '../operationsPHP/toggle-profile.php'; ?>
     </div>
     <!--Toggle vége-->
     <div class="container text-center mt-4">

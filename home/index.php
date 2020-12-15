@@ -1,10 +1,10 @@
 <?php
-require_once '..\operationsPHP\connect.php';
+require_once '../operationsPHP/connect.php';
 
 session_start();
 
 if (isset($_SESSION["email"])) {
-    header("location: ..\profile\profile.php");
+    header("location: ../profile/profile.php");
 }
 ?>
 
@@ -27,9 +27,9 @@ if (isset($_SESSION["email"])) {
         <div class="toggle d-flex justify-content-between">
             <i class="material-icons home-icon">home</i>
             <div class="other-page">
-                <a href="..\login\login-page.php">Bejelentkezés</a>
+                <a href="../login/login-page.php">Bejelentkezés</a>
                 <small class="mr-1 ml-1">|</small>
-                <a href="..\registration\register-page.php">Új fiók létrehozás</a>
+                <a href="../registration/register-page.php">Új fiók létrehozás</a>
             </div>
         </div>
         <div class="container">

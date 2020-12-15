@@ -1,5 +1,5 @@
 <?php
-    require_once '..\operationsPHP\connect.php';
+    require_once '../operationsPHP/connect.php';
 
     if(isset($_POST['name']) && isset($_POST['email']) && isset($_POST['password'])){
         $name = trim($_POST['name']);

@@ -1,5 +1,5 @@
 <?php
-    require_once '..\operationsPHP\connect.php';
+    require_once '../operationsPHP/connect.php';
 
     session_start();
 
