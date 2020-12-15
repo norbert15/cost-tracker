@@ -50,25 +50,21 @@ $result = mysqli_query($conn, $sql);
 $incomes = array();
 $expenditures = array();
 
-$done = false;
 if ($result->num_rows > 0) {
-    $done = false;
     while ($row = $result->fetch_assoc()) {
-        array_push($expenditures, $row["transport"]);
-        array_push($expenditures, $row["food"]);
-        array_push($expenditures, $row["shopping"]);
-        array_push($expenditures, $row["gift"]);
-        array_push($expenditures, $row["health"]);
-        array_push($expenditures, $row["family"]);
-        array_push($expenditures, $row["sport"]);
-        array_push($incomes, $row["income"]);
-        array_push($incomes, $row["etc"]);
+        array_push($expenditures, $row["transport"] < 0 ? 0 : $row["transport"]);
+        array_push($expenditures, $row["food"] < 0 ? 0 : $row["food"]);
+        array_push($expenditures, $row["shopping"] < 0 ? 0 : $row["shopping"]);
+        array_push($expenditures, $row["gift"] < 0 ? 0 : $row["gift"]);
+        array_push($expenditures, $row["health"] < 0 ? 0 : $row["health"]);
+        array_push($expenditures, $row["family"] < 0 ? 0 : $row["family"]);
+        array_push($expenditures, $row["sport"] < 0 ? 0 : $row["sport"]);
+        array_push($incomes, $row["income"] < 0 ? 0 : $row["income"]);
+        array_push($incomes, $row["etc"] < 0 ? 0 : $row["etc"]);
     }
 } else {
-    $done = true;
     for ($index = 0; $index < 7; $index++) {
         array_push($expenditures, 0);
-
         if ($index < 2) {
             array_push($incomes, 0);
         }

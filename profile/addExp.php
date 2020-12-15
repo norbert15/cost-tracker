@@ -5,33 +5,35 @@
 require_once "profile.php";
 
 $email = $_SESSION["email"];
-$transportEx = $_POST["transportEx"];
-$foodEx = $_POST["foodEx"];
-$shoppingEX = $_POST["shoppingEX"];
-$giftEx = $_POST["giftEx"];
-$healthEx = $_POST["healthEx"];
-$familyEx = $_POST["familyEx"];
-$sportEx = $_POST["sportEx"];
 
 //Nap ellenörzése!
 $check_day = "SELECT * FROM `expenditures` WHERE `email` = '$email' AND `date` LIKE '%$change_date_day%'";
 $result_check_day = mysqli_query($conn, $check_day);
 $day_data = mysqli_fetch_assoc($result_check_day);
 
+//Ellenörzés, hogy a költségek ne menjenek minuszba!
+$transportEx = ($_POST["transportEx"] + $day_data["transport"]);
+$foodEx = ($_POST["foodEx"] + $day_data["food"]);
+$shoppingEx = ($_POST["shoppingEx"] + $day_data["shopping"]);
+$giftEx = ($_POST["giftEx"] + $day_data["gift"]);
+$healthEx = ($_POST["healthEx"] + $day_data["health"]);
+$familyEx = ($_POST["familyEx"] + $day_data["family"]);
+$sportEx = ($_POST["sportEx"] + $day_data["sport"]);
+
 //Ha a mainap vesz fel költséget és már vet fel akkor update, ha nem akkor insert!
 if ($result_check_day->num_rows > 0) {
-    $update_expenditures = "UPDATE `expenditures` SET `transport`='".$day_data['transport']."'+'$transportEx', `food`='".$day_data['food']."'+'$foodEx', 
-    `shopping`='".$day_data['shopping']."'+'$shoppingEX', `gift`='".$day_data['gift']."'+'$giftEx', `health`='".$day_data['health']."'+'$healthEx',
-    `family`='".$day_data['family']."'+'$familyEx', `sport`='".$day_data['sport']."'+'$sportEx' WHERE `date` LIKE '%$change_date_day%' AND `email` = '$email'";
-    //Vissza jelzés küldés!
-    if ($conn->query($update_expenditures) === FALSE) {
-      echo "faild";
-    }
+  $update_expenditures = "UPDATE `expenditures` SET `transport`='$transportEx', `food`='$foodEx',
+    shopping ='$shoppingEx', `gift`='$giftEx', `health`='$healthEx', `family`='$familyEx', `sport`='$sportEx' 
+    WHERE `date` LIKE '%$change_date_day%' AND `email` = '$email'";
+  //Vissza jelzés küldés!
+  if ($conn->query($update_expenditures) === FALSE) {
+    echo "faild";
+  }
 } else {
-    $insert_expenditures = "INSERT INTO `expenditures` (`email`, `transport`, `food`, `shopping`, `gift`, `health`, `family`, `sport`, `date`)
-    VALUES ('$email', '$transportEx', '$foodEx', '$shoppingEX', '$giftEx', '$healthEx', '$familyEx', '$sportEx', '$change_date_day')";
-    //Vissza jelzés küldés!
-    if ($conn->query($insert_expenditures) === FALSE) {
-      echo "faild";
-    }
+  $insert_expenditures = "INSERT INTO `expenditures` (`email`, `transport`, `food`, `shopping`, `gift`, `health`, `family`, `sport`, `date`)
+    VALUES ('$email', '$transportEx', '$foodEx', '$shoppingEx', '$giftEx', '$healthEx', '$familyEx', '$sportEx', '$change_date_day')";
+  //Vissza jelzés küldés!
+  if ($conn->query($insert_expenditures) === FALSE) {
+    echo "faild";
+  }
 }

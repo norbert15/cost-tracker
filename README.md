@@ -8,7 +8,7 @@ A program használatához szükséges egy felhasználói fiók. Amit az oldalon 
 * **A felhasználó email címe**
 * **A későbbi bejelentkezéshez szükséges jelszó**
 
-A regisztráció után a bejelentkezés oldal következik, ahol a felhasználó beléphet az **email cim** és a hozzá tartozó **jelszó** megadásával. A weboldal **6 fő** funkciót lát el.
+A regisztráció után a bejelentkezés oldal következik, ahol a felhasználó beléphet az **email cím** és a hozzá tartozó **jelszó** megadásával. A weboldal **6 fő** funkciót lát el.
 
 **1. Költségek rögzítése:**
 * **7 különböző költség kategóría közül választhat a felhasználó:**

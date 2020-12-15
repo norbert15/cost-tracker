@@ -18,20 +18,18 @@ $(document).ready(function(){
     }
 
     $(".expendAdd").click(function(){
-        const transportEx = $("#transportEx").val();
+        const transportEx = ($("#transportEx").val());
         const foodEx = $("#foodEx").val();
-        const shoppingEX = $("#shoppingEX").val();
+        const shoppingEx = $("#shoppingEX").val();
         const giftEx = $("#giftEx").val();
         const healthEx = $("#healthEx").val();
         const familyEx = $("#familyEx").val();
         const sportEx = $("#sportEx").val();
-        
-
 
         $.post('addExp.php', {
             transportEx: transportEx,
             foodEx: foodEx,
-            shoppingEX: shoppingEX,
+            shoppingEx: shoppingEx,
             giftEx: giftEx,
             healthEx: healthEx,
             familyEx: familyEx,

@@ -6,7 +6,7 @@ if (!isset($_SESSION["email"])) {
 }
 $email = $_SESSION["email"];
 
-if(isset($_SESSION["change"])){
+if (isset($_SESSION["change"])) {
     $_SESSION["change"] = 0;
 }
 require_once '..\operationsPHP\connect.php';
@@ -54,7 +54,6 @@ switch ($mydate['mon']) {
         $hun_month = "December";
         break;
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -81,45 +80,28 @@ switch ($mydate['mon']) {
     </div>
     <!--Toggle vége-->
     <div class="container text-center mt-4">
-            <table class="table table-hover table-bordered table-responsive font-weight-bold">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">Dátum</th>
-                        <th scope="col">Utazási költség</th>
-                        <th scope="col">Élelmiszer költség</th>
-                        <th scope="col">Vásárlási költség</th>
-                        <th scope="col">Ajándék költség</th>
-                        <th scope="col">Egészségügyi költség</th>
-                        <th scope="col">Családi költség</th>
-                        <th scope="col">Szabadidő költség</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $sql = "SELECT DATE_FORMAT(date,'%Y %M') AS dates, SUM(`transport`) AS transport, SUM(`food`) AS food, SUM(`shopping`) AS shopping, SUM(`gift`) AS gift, 
-                    SUM(`health`) AS health, SUM(`family`) AS family, SUM(`sport`) AS sport 
-                    FROM `expenditures` WHERE `email` = '$email' AND (transport > 0 OR food > 0 OR shopping > 0 OR gift > 0 OR
-                    health > 0 OR family > 0 OR sport > 0) GROUP BY dates ORDER BY date DESC LIMIT 12";
-                    $result = mysqli_query($conn, $sql);
-
-                    if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
-                            echo '<tr><td style="width: 120px;">' . $row["dates"] . '</td>
-                                <td>' . number_format($row["transport"], 0, ",", ".") . '</td>
-                                <td>' . number_format($row["food"], 0, ",", ".") . '</td>
-                                <td>' . number_format($row["shopping"], 0, ",", ".") . '</td>
-                                <td>' . number_format($row["gift"], 0, ",", ".") . '</td>
-                                <td>' . number_format($row["health"], 0, ",", ".") . '</td>
-                                <td>' . number_format($row["family"], 0, ",", ".") . '</td>
-                                <td>' . number_format($row["sport"], 0, ",", ".") . '</td></tr>';
-                        }
-                    }
-                    ?>
-                </tbody>
-            </table>
+        <table class="table table-hover table-bordered table-responsive font-weight-bold">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Dátum</th>
+                    <th scope="col">Utazási költség</th>
+                    <th scope="col">Élelmiszer költség</th>
+                    <th scope="col">Vásárlási költség</th>
+                    <th scope="col">Ajándék költség</th>
+                    <th scope="col">Egészségügyi költség</th>
+                    <th scope="col">Családi költség</th>
+                    <th scope="col">Szabadidő költség</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                require_once 'overview/months-query.php';
+                ?>
+            </tbody>
+        </table>
     </div>
     <script>
-        $(document).ready(function(){
+        $(document).ready(function() {
             $("#overview").addClass("font-weight-bold");
             $("#previous-month").addClass("disabled");
             $("#next-month").addClass("disabled");
