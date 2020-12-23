@@ -51,11 +51,11 @@ A program futtatásához szükséges elhelyezni a fájl tartalmát a `XAMPP/htdo
 
 A program megfelelő mükődéséhez importálni kell a `phpMyAdmin` felületén az adatbázist. 
 A `phpMyAdmin` elérhető a `XAMPP` applikációban az `Admin` fülre kattintva.
-Az importáláshoz szükséges sql script:
+Az adatbázis importáláshoz szükséges sql script:
 https://github.com/norbert15/cost-tracker/blob/main/cost_tracker.sql
 
 A folyamatok elvégzése után a következő oldalon érhető el a weboldal:
-http://localhost/cost-tracker/login/login-page.php
+http://localhost/cost-tracker/login
 
 # Felhasznált technológiák
 * **JQuery 3.5.1**
@@ -63,4 +63,5 @@ http://localhost/cost-tracker/login/login-page.php
 * **HTML5**
 * **CSS**
 * **Bootstrap 4.5.3**
-* **PHP 5.2.0**
+* **PHP 7.4.11**
+* **Flight PHP framework v1.3.8**
