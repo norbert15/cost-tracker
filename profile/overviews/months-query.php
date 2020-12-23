@@ -14,16 +14,16 @@ $sql = "SELECT CONCAT(DATE_FORMAT(date,'%Y'), ' ',
                     WHEN DATE_FORMAT(date, '%M') = 'February' THEN 'Február'
                     WHEN DATE_FORMAT(date, '%M') = 'January' THEN 'Január'
                     END, ' ') 
-                    AS dates, SUM(`transport`) AS transport, SUM(`food`) AS food, SUM(`shopping`) AS shopping, SUM(`gift`) AS gift, 
-                    SUM(`health`) AS health, SUM(`family`) AS family, SUM(`sport`) AS sport 
-                    FROM `expenditures` WHERE `email` = '$email' AND (transport > 0 OR food > 0 OR shopping > 0 OR gift > 0 OR
+                    AS dates, `transport` AS transport, `food` AS food, `shopping` AS shopping,`gift` AS gift, 
+                    `health` AS health, `family` AS family,`sport` AS sport 
+                    FROM `expenditures` WHERE `email` = '$_SESSION[email]' AND (transport > 0 OR food > 0 OR shopping > 0 OR gift > 0 OR
                     health > 0 OR family > 0 OR sport > 0) GROUP BY dates ORDER BY date DESC";
 
 $result = mysqli_query($conn, $sql);
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        echo '<tr><td style="width: 120px;">' . $row["dates"] . '</td>
+        echo '<tr><td>' . $row["dates"] . '</td>
                 <td>' . number_format($row["transport"] < 0 ? 0 : $row["transport"], 0, ",", ".") . '</td>
                 <td>' . number_format($row["food"] < 0 ? 0 : $row["food"], 0, ",", ".") . '</td>
                 <td>' . number_format($row["shopping"] < 0 ? 0 : $row["shopping"], 0, ",", ".") . '</td>

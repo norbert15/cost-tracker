@@ -1,5 +1,12 @@
 $(document).ready(function(){
 
+    $("#logout").click(function () {
+        $.post("logout.php", function () {
+          window.location = "../login/login.php";
+        });
+    });
+
+
     $(".change-name").click(function(){
         var fullname = $("#fullname").val();
         var success_alert = document.getElementById("success-name");
@@ -25,7 +32,7 @@ $(document).ready(function(){
         }else{
             $("#fullname").addClass("is-invalid");
         }
-    })
+    });
 
     $(".change-password").click(function(){
         var old_password = $("#old-password").val();
@@ -72,9 +79,9 @@ $(document).ready(function(){
                         success_alert.setAttribute("hidden", "");
                     }, 2000);
                 }
-            })
+            });
         } 
-    })
+    });
 
     $(".close-modify, .close").click(function(){
         $("#old-password").removeClass("is-invalid");
@@ -85,5 +92,5 @@ $(document).ready(function(){
         $("#new-password-confirm").val("");
         $("#fullname").removeClass("is-invalid");
         $(".error").html("");
-    })
+    });
 })

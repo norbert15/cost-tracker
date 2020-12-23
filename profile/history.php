@@ -1,11 +1,11 @@
 <?php
 //Az adott hónap költségeinek elkérése,
 //Költségek kiszűrése, ha az adott hónap valamelyik napjában nem volt költség felvéve
-$date_history = "SELECT `date`, `transport`, `food`, `shopping`, `gift`, `health`, `family`, `sport` 
-                        FROM `expenditures` WHERE `email` = '$email' AND date LIKE '%$change_date%' 
-                        AND (`transport` > 0 OR `food` > 0 OR `shopping` > 0 OR `gift` > 0 OR `health` > 0 OR `family` > 0 
-                        OR `sport` > 0) ORDER BY date DESC";
-$result_history = mysqli_query($conn, $date_history);
+Flight::set("date_history", "SELECT `date`, `transport`, `food`, `shopping`, `gift`, `health`, `family`, `sport` 
+                        FROM `expenditures` WHERE `email` = '$_SESSION[email]' AND date LIKE '%$_SESSION[change_date]%' 
+                        AND (`transport` != 0 OR `food` != 0 OR `shopping` != 0 OR `gift` != 0 OR `health` != 0 OR `family` != 0 
+                        OR `sport` != 0) ORDER BY date DESC");
+$result_history = mysqli_query($conn, Flight::get("date_history"));
 
 //A költségek feltüntese az elözményekben.
 //Adott hónap napjai megjelenítése

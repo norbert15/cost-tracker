@@ -103,31 +103,30 @@ $(document).ready(function(){
     $("#login").click(function(){
         const email = $("#email").val();
         const password = $("#password").val();
-        var done = true;
+        var done = 0;
 
         if(email.length == 0){
             $(".email").addClass("is-invalid");
-            done = false;
         }else{
             $(".email").removeClass("is-invalid");
-            done = true;
+            done++;
         }
 
         if(password.length == 0){
             $(".password").addClass("is-invalid");
-            done = false;
         }else{
             $(".password").removeClass("is-invalid");
-            done = true;
+            done++;
         }  
 
-        if(done){
+        if(done == 2){
             $.ajax({
                 type: "POST",
                 url: "../login/result-login.php",
                 data: {"email": email, "password": password},
                 dataType: 'JSON',
                 success : function(feedback){
+                    console.log(feedback);
                     if(feedback.status === "success"){
                         window.location = "../profile/profile.php";
                     }else if(feedback.status === "error"){

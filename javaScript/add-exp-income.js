@@ -17,46 +17,25 @@ $(document).ready(function(){
         }, 2000);
     }
 
-    $(".expendAdd").click(function(){
-        const transportEx = ($("#transportEx").val());
-        const foodEx = $("#foodEx").val();
-        const shoppingEx = $("#shoppingEX").val();
-        const giftEx = $("#giftEx").val();
-        const healthEx = $("#healthEx").val();
-        const familyEx = $("#familyEx").val();
-        const sportEx = $("#sportEx").val();
+    $(".main").click(function () {
+        select_by_index = $(this).attr("id");
+    });
 
-        $.post('addExp.php', {
-            transportEx: transportEx,
-            foodEx: foodEx,
-            shoppingEx: shoppingEx,
-            giftEx: giftEx,
-            healthEx: healthEx,
-            familyEx: familyEx,
-            sportEx: sportEx
+    $(".add-sum").click(function(){
+        var sum = $(".one-sum:eq(" + select_by_index +")").val();
+        var name = $(".one-name:eq(" + select_by_index + ")").val();
+
+        $.post('add-income-or-expenditure.php', {
+            sum: sum,
+            name: name
         },function(status){
-            if(status === "faild"){
+            console.log(status);
+            if(status === "failed"){
                 localStorage.setItem("error", "sikertelen");
             }else{
                 localStorage.setItem("success", "sikeres");
+                location.reload();
             }
-        })
-    })
-
-    $(".add").click(function(){
-        const income = $("#incomeAdd").val();
-        const etc = $("#etcAdd").val();
-
-        $.post('addIncome.php', {
-            income: income,
-            etc: etc
-        },function(status){
-             if(status === "faild"){
-                localStorage.setItem("error", "sikertelen");
-            }else{
-                localStorage.setItem("success", "sikeres");
-            }
-        })
-    })
-
+        });
+    });
 })

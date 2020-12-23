@@ -1,19 +1,12 @@
 <?php
-session_start();
+require_once 'operationsPHP/connect.php';
+require_once 'operationsPHP/expend-income.php';
 
-if (!isset($_SESSION["email"])) {
-    header("location: ../login/login-page.php");
-}
-$email = $_SESSION["email"];
-
-require_once '../operationsPHP/connect.php';
-require_once '../operationsPHP/expend-income.php';
-
-$setClass = "";
-if (($incomeSum - $expendituresSum) >= 0) {
-    $setClass = "plus";
+Flight::set("set_class", "");
+if ((Flight::get("income_sum") - Flight::get("expenditures_sum")) >= 0) {
+    Flight::set("set_class", "plus");
 } else {
-    $setClass = "minus";
+    Flight::set("set_class", "minus");
 }
 ?>
 
@@ -22,7 +15,7 @@ if (($incomeSum - $expendituresSum) >= 0) {
 
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -32,14 +25,14 @@ if (($incomeSum - $expendituresSum) >= 0) {
     <link rel="stylesheet" href="profile.css" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Költségkövető</title>
+    <title><?php echo $title ?></title>
 </head>
 
 <body>
     <div>
         <!--Toggle kezdés-->
         <div>
-            <?php require_once '../operationsPHP/toggle-profile.php'; ?>
+            <?php require_once 'operationsPHP/toggle-profile.php'; ?>
         </div>
         <!--Toggle vége-->
         <!--Vissza jelzés-->
@@ -49,15 +42,16 @@ if (($incomeSum - $expendituresSum) >= 0) {
         <!--Vissza jelzés vége-->
         <div class="container text-center mt-3">
             <div class="head">
-                <h1 class="mt-4">Bevételek: <?php echo number_format($incomeSum, 0, ",", ".") ?> Ft</h1>
-                <small style="font-style: italic;">Kattints valamelyik bevétel ikonra az összeg felvételéhez!</small>
+                <h1 class="mt-4"><?php echo $incomeText . number_format(Flight::get("income_sum"), 0, ",", ".") ?> Ft</h1>
+                <small style="font-style: italic;"><?php echo $incomeText2 ?></small>
             </div>
             <div class="d-flex justify-content-center mt-3 icon-margin">
                 <!--Bevételek kezdése-->
-                <div class="div-payment mr-4">
-                    <small>Fizetés</small><br />
+                <div class="div-payment main mr-4" id="0">
+                    <small><?php echo $payment ?></small><br />
+                    <input type="text" hidden class="one-name" value="income">
                     <button type="button" data-toggle="modal" data-target="#income">
-                        <i class="material-icons">payment</i>
+                        <i class="fa fa-credit-card"></i>
                     </button><br />
                     <small> <?php echo number_format($incomes[0], 0, ",", ".") ?> Ft</small>
                     <!--Modal kezdés-->
@@ -65,19 +59,19 @@ if (($incomeSum - $expendituresSum) >= 0) {
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h3 class="modal-title">Fizetés megadása</h3>
+                                    <h3 class="modal-title"><?php echo $paymentModalTitle ?></h3>
                                     <button type="button" class="close" data-dismiss="modal">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body text-left">
-                                    <label class="font-weight-bold" for="incomeAdd">Kívánt összeg: </label>
-                                    <input type="number" id="incomeAdd" name="income" />
+                                    <label class="font-weight-bold" for="incomeAdd"><?php echo $desiredAmount ?></label>
+                                    <input type="number" class="one-sum" id="incomeAdd" name="income" />
                                 </div>
                                 <div class="modal-footer d-flex justify-content-start">
                                     <form>
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Bezár</button>
-                                        <button type="submit" class="btn btn-primary add">Hozzáad</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo $close ?></button>
+                                        <button type="button" class="btn btn-primary add-sum"><?php echo $add ?></button>
                                     </form>
                                 </div>
                             </div>
@@ -86,10 +80,11 @@ if (($incomeSum - $expendituresSum) >= 0) {
                     <!--Modal vége-->
                 </div>
                 <!--Egyéb bevétel -->
-                <div class="div-etc">
-                    <small>Egyéb bevétel</small><br />
+                <div class="div-etc main" id="1">
+                    <small><?php echo $etc ?></small><br />
+                    <input type="text" hidden class="one-name" value="etc">
                     <button type="button" data-toggle="modal" data-target="#etc">
-                        <i class="material-icons">money</i>
+                        <i class="fa fa-money"></i>
                     </button><br />
                     <small><?php echo number_format($incomes[1], 0, ",", ".") ?> Ft</small>
                     <!--Modal kezdés-->
@@ -97,19 +92,19 @@ if (($incomeSum - $expendituresSum) >= 0) {
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h3 class="modal-title">Egyéb bevétel megadása</h3>
+                                    <h3 class="modal-title"><?php echo $etcModalTitle ?></h3>
                                     <button type="button" class="close" data-dismiss="modal">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body text-left">
-                                    <label class="font-weight-bold" for="etcAdd">Kívánt összeg: </label>
-                                    <input type="number" id="etcAdd" name="etc" />
+                                    <label class="font-weight-bold" for="etcAdd"><?php echo $desiredAmount ?></label>
+                                    <input type="number" class="one-sum" id="etcAdd" name="etc" />
                                 </div>
                                 <div class="modal-footer d-flex justify-content-start">
                                     <form>
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Bezár</button>
-                                        <button type="submit" class="btn btn-primary add">Hozzáad</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo $close ?></button>
+                                        <button type="button" class="btn btn-primary add-sum"><?php echo $add ?></button>
                                     </form>
                                 </div>
                             </div>
@@ -121,11 +116,11 @@ if (($incomeSum - $expendituresSum) >= 0) {
             </div>
             <!--Progress kezéds-->
             <div class="d-flex justify-content-center mt-3">
-                <h2>Meg maradt bevétel: <span class="<?php echo $setClass ?>"> <?php echo number_format(($incomeSum - $expendituresSum), 0, ",", ".") ?> Ft </span></h1>
+                <h2><?php echo $incomeText3 ?><span class="<?php echo Flight::get("set_class"); ?>"> <?php echo number_format((Flight::get("income_sum") - Flight::get("expenditures_sum")), 0, ",", ".") ?> Ft </span></h1>
             </div>
             <div class="progress-label">
-                <small>Össz Költség</small>
-                <small>Össz Bevétel</small>
+                <small><?php echo $allCost ?></small>
+                <small><?php echo $allRevenues ?></small>
             </div>
             <div class="d-flex justify-content-center mt-4 icon-margin progress-income">
                 <div class="progress vertical">
@@ -146,13 +141,13 @@ if (($incomeSum - $expendituresSum) >= 0) {
             <!--Progress vége-->
             <div class="marg"></div>
             <div class="card text-center d-inline">
-                <div class="card-header">Elözmények (havi)</div>
+                <div class="card-header"><?php echo $history ?></div>
                 <div class="card-body">
                     <?php
                     //Az adott hónap bevételeinek elkérése,
                     //Bevételek kiszűrése, ha az adott hónap valamelyik napjában nem volt bevétel felvéve.
                     $date_history = "SELECT `date`, income, etc 
-                        FROM `expenditures` WHERE `email` = '$email' AND date LIKE '%$change_date%' AND (income > 0 OR etc > 0) ORDER BY date DESC";
+                        FROM `expenditures` WHERE `email` = '$_SESSION[email]' AND date LIKE '%" . Flight::get("change_date") . "%' AND (income > 0 OR etc > 0) ORDER BY date DESC";
 
                     $result_history = mysqli_query($conn, $date_history);
 

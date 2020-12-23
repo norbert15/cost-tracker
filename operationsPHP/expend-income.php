@@ -2,26 +2,28 @@
 //Hónap váltás vizsgálat!
 if (isset($_SESSION["change"])) {
     //A léptető elkérése
-    $test = $_SESSION["change"];
+    Flight::set("change", $_SESSION["change"]);
 
-    //A hónap váltásá
-    $change_date = date("Y-m", strtotime($test . 'months'));
-    $change_date_day = date("Y-m-d", strtotime($test . 'months'));
+    //A hónap váltás
+    Flight::set("change_date", date("Y-m", strtotime(Flight::get("change") . 'months')));
+    Flight::set("change_date_day", date("Y-m-d", strtotime(Flight::get("change") . 'months')));
 
     //A toggleben lévő dátum váltása
-    $mydate = getdate(date("U", strtotime($test . 'months')));
+    Flight::set("mydate", getdate(date("U", strtotime(Flight::get("change") . 'months'))));
 } else {
-    //A hónap váltásá
-    $change_date = date("Y-m");
-    $change_date_day = date("Y-m-d");
+    //A hónap váltás
+    Flight::set("change_date", date("Y-m"));
+    Flight::set("change_date_day", date("Y-m-d"));
 
     //A toggleben lévő dátum váltása
-    $mydate = getdate(date("U"));
+    Flight::set("mydate", getdate(date("U")));
 }
+$_SESSION["change_date_day"] = Flight::get("change_date_day");
+$_SESSION["change_date"] =Flight::get("change_date");
 
 //Felhasználó adatainak elkérése
-$profile_data = "SELECT `fullname`, `email` FROM `users` WHERE `email` = '$email'";
-$result_profile = mysqli_query($conn, $profile_data);
+Flight::set("profile_data", "SELECT `fullname`, `email` FROM `users` WHERE `email` = '$_SESSION[email]'");
+$result_profile = mysqli_query($conn, Flight::get("profile_data"));
 $data = mysqli_fetch_assoc($result_profile);
 
 if($result_profile->num_rows > 0){
@@ -29,22 +31,21 @@ if($result_profile->num_rows > 0){
 }
 
 //Hónap ellenőrzése (JELENLEGI DÁTUM/HÓNAP)!
-$current_date = date("Y-m");
-$check_date = "SELECT `date` FROM `expenditures` WHERE `date` LIKE '%$current_date%' AND `email` = '$email'";
-$result_check_date = mysqli_query($conn, $check_date);
+Flight::set("current_date", date("Y-m"));
+Flight::set("check_date", "SELECT `date` FROM `expenditures` WHERE `date` LIKE '%".Flight::get("current_date")."%' AND `email` = '$_SESSION[email]'");
+$result_check_date = mysqli_query($conn, Flight::get("check_date"));
 
 if ($result_check_date->num_rows == 0) {
-    $date = date("Y-m-d");
-    $insert_next_date = "INSERT INTO `expenditures`(email, date) 
-      VALUES ('$email', '$date')";
-    $conn->query($insert_next_date);
+    Flight::set("date", date("Y-m-d"));
+    Flight::set("insert_next_date", "INSERT INTO `expenditures`(email, date) 
+      VALUES ('$_SESSION[email]', '". Flight::get("date")."')");
+    $conn->query(Flight::get("insert_next_date"));
 }
 
-//Költségek elkérése!
-$sql = "SELECT SUM(`transport`) AS transport, SUM(`food`) AS food, SUM(`shopping`) AS shopping, SUM(`gift`) AS gift, 
-SUM(`health`) AS health, SUM(`family`) AS family, SUM(`sport`) AS sport, SUM(`income`) AS income, SUM(`etc`) AS etc 
-FROM `expenditures` WHERE `email` = '$email' AND `date` LIKE '%$change_date%'";
-$result = mysqli_query($conn, $sql);
+//Költségek és bevételek elkérése!
+Flight::set("sql", "SELECT `transport`, `food`, `shopping`, `gift`, `health`, `family`, `sport`, `income`, `etc` 
+FROM `expenditures` WHERE `email` = '$_SESSION[email]' AND `date` LIKE '%".Flight::get("change_date")."%'");
+$result = mysqli_query($conn, Flight::get("sql"));
 
 //Az összes költség és bevétel egy tömbe való felvétele!
 $incomes = array();
@@ -72,19 +73,20 @@ if ($result->num_rows > 0) {
 }
 
 //Az összes költség összege!
-$expendituresSum = 0;
+Flight::set("expenditures_sum", 0);
+
 foreach ($expenditures as $value) {
-    $expendituresSum += $value;
+    Flight::set("expenditures_sum", Flight::get("expenditures_sum")+ $value);
 }
 
 //Az összes bevétel összege!
-$incomeSum = $incomes[0] + $incomes[1];
+Flight::set("income_sum", $incomes[0] + $incomes[1]);
 
 //Százalék számitás költség!
 $expendPercent = array();
 for ($index = 0; $index < count($expenditures); $index++) {
     if ($expenditures[$index] > 0) {
-        array_push($expendPercent, ($expenditures[$index] / $expendituresSum) * 100);
+        array_push($expendPercent, ($expenditures[$index] / Flight::get("expenditures_sum")) * 100);
     } else {
         array_push($expendPercent, 0);
     }
@@ -92,10 +94,10 @@ for ($index = 0; $index < count($expenditures); $index++) {
 
 //Százalék számitás bevétel!
 $incomePercent = array();
-if ($incomeSum > 0) {
-    array_push($incomePercent, ($expendituresSum / $incomeSum) * 100);
+if (Flight::get("income_sum") > 0) {
+    array_push($incomePercent, (Flight::get("expenditures_sum") / Flight::get("income_sum")) * 100);
     array_push($incomePercent, (100 - $incomePercent[0]));
-} else if ($expendituresSum > 0) {
+} else if (Flight::get("expenditures_sum") > 0) {
     array_push($incomePercent, 100);
     array_push($incomePercent, 0);
 } else {
@@ -104,19 +106,19 @@ if ($incomeSum > 0) {
 }
 
 //Magyar hónap nevek
-$hun_month = "";
+Flight::set("hun", "");
 
-switch($mydate['mon']){
- case 1: $hun_month = "Január"; break;
- case 2: $hun_month = "Február"; break;
- case 3: $hun_month = "Március"; break;
- case 4: $hun_month = "Április"; break;
- case 5: $hun_month = "Május"; break;
- case 6: $hun_month = "Június"; break;
- case 7: $hun_month = "Július"; break;
- case 8: $hun_month = "Augusztus"; break;
- case 9: $hun_month = "Szeptember"; break;
- case 10: $hun_month = "Október"; break;
- case 11: $hun_month = "November"; break;
- case 12: $hun_month = "December"; break;
+switch(Flight::get("mydate")['mon']){
+ case 1: Flight::set("hun", "Január"); break;
+ case 2: Flight::set("hun", "Február"); break;
+ case 3: Flight::set("hun", "Március"); break;
+ case 4: Flight::set("hun", "Április"); break;
+ case 5: Flight::set("hun", "Május"); break;
+ case 6: Flight::set("hun", "Június"); break;
+ case 7: Flight::set("hun", "Július"); break;
+ case 8: Flight::set("hun", "Augusztus"); break;
+ case 9: Flight::set("hun", "Szeptember"); break;
+ case 10: Flight::set("hun", "Október"); break;
+ case 11: Flight::set("hun", "November"); break;
+ case 12: Flight::set("hun", "December"); break;
 }
