@@ -1,0 +1,270 @@
+/*A kölcségek közötti fix távolság*/
+.expenditutes > div {
+  margin-right: 25px;
+}
+
+/*A progress-bar beállítása!*/
+.vertical {
+  margin-top: 70px;
+  width: 150px;
+  height: 40px;
+  background: rgb(226, 225, 225);
+  transform: rotate(-90deg);
+}
+
+.progress-label {
+  margin-top: 15px;
+  margin-bottom: -30px;
+}
+
+.progress-label > small {
+  margin-right: 20px;
+  margin-left: 15px;
+}
+
+/*A progress-bar távolságának beállítása*/
+.ver-prof {
+  margin-left: -50px;
+}
+
+.progress-transport {
+  margin-left: -2px !important;
+}
+
+/*A kategoriák távolságának beállítása*/
+.div-food {
+  margin-right: 35px !important;
+}
+
+.div-shopping {
+  margin-right: 40px !important;
+}
+
+.div-health {
+  margin-right: 27px !important;
+}
+
+.div-family {
+  margin-right: 40px !important;
+}
+
+/*Az ikonra kattintva feljövö modal beállításai*/
+.modal-header > button {
+  margin-top: -5px !important;
+}
+
+.modal-footer > button {
+  width: 85px;
+}
+
+form > button {
+  border-radius: 0% !important;
+  width: 100px !important;
+}
+
+.marg {
+  margin-top: 70px;
+}
+
+/*Egyébb szöveg beállítások*/
+small {
+  font-size: 15px;
+  font-weight: bold;
+  margin-top: 22px;
+}
+
+h1 {
+  margin-bottom: 25px;
+}
+
+p {
+  margin-bottom: -2px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.minus {
+  color: red;
+}
+
+.plus {
+  color: rgb(30, 192, 30);
+}
+
+.p-percent,
+.p-income {
+  transform: rotate(90deg);
+  position: absolute;
+  font-size: 15px;
+  left: 40%;
+  right: 40%;
+}
+
+table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 1rem;
+}
+
+tr > th {
+  border: none;
+}
+
+td,
+th {
+  padding: 15px 6px;
+}
+
+.table-m {
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+/*Képernyőhöz való igazítások*/
+@media screen and (max-width: 992px) {
+  .vertical {
+    margin-left: -20px;
+  }
+  .progress-income {
+    margin-left: 20px;
+  }
+  .ver-prof {
+    margin-left: -60px !important;
+  }
+  .progress-transport {
+    margin-left: 0px !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .ver-prof {
+    margin-left: -90px !important;
+  }
+  .progress-transport {
+    margin-left: 0px !important;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .expenditutes {
+    margin-left: 2px !important;
+  }
+  .ver-prof {
+    margin: 10px 0 10px 0 !important;
+    transform: rotate(0deg) !important;
+    width: 300px !important;
+  }
+  .progress-sport {
+    margin-bottom: -50px !important;
+  }
+  .p-percent {
+    transform: rotate(0deg) !important;
+  }
+
+  .table-m {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+}
+
+@media screen and (max-width: 441px) {
+  .div-transport {
+    margin-left: 10px !important;
+  }
+  .div-gift {
+    margin-left: 10px;
+  }
+  .div-sport {
+    margin-bottom: -20px;
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+  }
+
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  tr {
+    margin: 0 0 1rem 0;
+  }
+
+  td {
+    position: relative;
+    padding-left: 50%;
+    height: 50px;
+    line-height: 3;
+  }
+
+  td:before {
+    position: absolute;
+    top: 0;
+    left: 1px;
+    width: 40%;
+    padding-right: 10px;
+    white-space: nowrap;
+  }
+
+  td {
+    padding-top: 0;
+  }
+
+  td:nth-of-type(1):before {
+    content: "Dátum:";
+    background-color: #292b2c;
+    color: white;
+    padding-left: 10px;
+  }
+  td:nth-of-type(2):before {
+    content: "Közlekedés:";
+    background-color: #292b2c;
+    color: white;
+    padding-left: 10px;
+  }
+  td:nth-of-type(3):before {
+    content: "Élelmiszer:";
+    background-color: #292b2c;
+    color: white;
+    padding-left: 10px;
+  }
+  td:nth-of-type(4):before {
+    content: "Vásárlás:";
+    background-color: #292b2c;
+    color: white;
+    padding-left: 10px;
+  }
+  td:nth-of-type(5):before {
+    content: "Ajándék:";
+    background-color: #292b2c;
+    color: white;
+    padding-left: 10px;
+  }
+  td:nth-of-type(6):before {
+    content: "Egészségügy:";
+    background-color: #292b2c;
+    color: white;
+    padding-left: 10px;
+  }
+  td:nth-of-type(7):before {
+    content: "Család:";
+    background-color: #292b2c;
+    color: white;
+    padding-left: 10px;
+  }
+  td:nth-of-type(8):before {
+    content: "Sport:";
+    background-color: #292b2c;
+    color: white;
+    padding-left: 10px;
+  }
+}

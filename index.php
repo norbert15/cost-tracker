@@ -1,74 +1,62 @@
 <?php
-require 'flight/Flight.php';
+require 'vendor/autoload.php';
+require 'controller/home/render.php';
+require 'controller/login/render.php';
+require 'controller/register/render.php';
+require 'controller/profile/render/cost-render.php';
+require 'controller/profile/render/overview-render.php';
+require 'controller/profile/render/revenues-render.php';
+
 session_start();
 
-Flight::map("checkLoggedIn", function(){
-    return isset($_SESSION["email"]) && $_SESSION["email"] != null;
-});
+if(isset($_SESSION["email"]) && $_SESSION["email"] != null){
+    Flight::route('GET|POST /profile', function(){
+        Flight::redirect("profile/cost");
+    });
+    
+    Flight::route('GET|POST /profile/cost', function(){
+        Flight::cost_render();
+    });
+    
+    Flight::route('GET|POST /profile/revenues', function(){
+      Flight::revenues_render();
+    });
+    
+    Flight::route('GET|POST /profile/overview', function(){
+        Flight::overview_render();
+    });
 
-Flight::map("renderOrRedirectByLoggedIn", function($render,  $redirect){
-    if (Flight::checkLoggedIn()) {
-        Flight::redirect($redirect);
-    } else {
-        Flight::render($render);
-    }
-});
+    Flight::route('GET|POST /profile/logout' ,function(){
+        session_destroy();
+        session_write_close();
+        Flight::redirect("../login");
+    });
+    
+    Flight::route('GET|POST /profile/*', function(){
+        Flight::redirect("/profile/cost");
+    });
 
-Flight::map("renderOrRedirectByNotLoggedIn", function($render,  $redirect){
-    if (!Flight::checkLoggedIn()) {
-        Flight::redirect($redirect);
-    } else {
-        Flight::render($render);
-    }
-});
+    Flight::route('GET|POST /*', function(){
+        Flight::redirect("/profile/cost");
+    });
 
-Flight::route('/', function(){
-    Flight::redirect("home");
-});
+}else{
+    Flight::route('GET|POST /home', function(){
+        Flight::home_render();
+    });
+    
+    Flight::route('GET|POST /login', function(){
+        Flight::login_render();
+    });
+    
+    Flight::route('GET|POST /registration', function(){
+        Flight::register_render();
+    });
 
-Flight::route('/home', function(){
-    Flight::renderOrRedirectByLoggedIn("../home/render.php", "profile");
-});
-
-Flight::route('/home/*', function(){
-    Flight::redirect("home");
-});
-
-Flight::route('/login', function(){
-    Flight::renderOrRedirectByLoggedIn("../login/render.php", "profile");
-});
-
-Flight::route('/login/*', function(){
-    Flight::redirect("login");
-});
-
-Flight::route('/registration', function(){
-    Flight::renderOrRedirectByLoggedIn("../registration/render.php", "profile");
-});
-
-Flight::route('/registration/*', function(){
-    Flight::redirect("registration");
-});
-
-Flight::route('/profile', function(){
-    Flight::renderOrRedirectByNotLoggedIn("../profile/render.php", "login");
-});
-
-Flight::route('/profile/revenues', function(){
-    Flight::renderOrRedirectByNotLoggedIn("../profile/revenues-render.php", "login");
-});
-
-Flight::route('/profile/overview', function(){
-    Flight::renderOrRedirectByNotLoggedIn("../profile/overview-render.php", "login");
-});
-
-Flight::route('/profile/*', function(){
-    Flight::redirect("/profile");
-});
-
-Flight::route('/*', function(){
-    Flight::redirect("home");
-});
+    Flight::route("GET|POST /*", function(){
+        Flight::redirect("../login");
+    });
+}
 
 Flight::start();
 ?>
