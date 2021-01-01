@@ -3,6 +3,7 @@
 A program egy költségkövető weblapot reprezentál, amiben a felhasználó havonta tudja rögzíteni a költségeit és bevételeit.
 A költségek és bevételek kategorizálva szerepelnek a weboldalon.
 A program használatához szükséges egy felhasználói fiók. Amit az oldalon történő regisztráció biztosít.
+
 **Regisztrációhoz szükséges adatok:**
 
 -   **A felhasználó teljes neve**
@@ -58,6 +59,9 @@ A program megfelelő mükődéséhez importálni kell a `phpMyAdmin` felületén
 A `phpMyAdmin` elérhető a `XAMPP` applikációban az `Admin` fülre kattintva.
 Az adatbázis importáláshoz szükséges sql script:
 https://github.com/norbert15/cost-tracker/blob/main/cost_tracker.sql
+
+A megfelelő mükődéshez futattni kell a következő command line parancsot:
+`composer install`
 
 A futtatáshoz szükséges command line parancs:
 `php -S localhost:8000 routing.php`, amelyet a projekt fő mappájában kell kiadni.
