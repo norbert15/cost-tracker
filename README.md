@@ -51,6 +51,12 @@ A költésgek rögzítése oldalon és a bevételek rögzítése oldalon a felha
 A program futtatásához a `XAMPP 7.4.11` verziója szükséges!
 A `XAMPP` applikációban a `MYSQL` elindítására szükségünk van.
 
+A program megfelelő mükődéséhez telepíteni kell a következőt:
+`https://getcomposer.org/Composer-Setup.exe`, amely a `xampp/php/php.exe` helyre telepítendő.
+
+A fent említett .exe fájl sikeres telepítése után a következő command line parancsot kell kiadni a projekt fő mappájában:
+`composer install`
+
 # Használati útmutató
 
 A program futtatásához szükséges elhelyezni a fájl tartalmát a `XAMPP/htdocs` mappában.
@@ -59,9 +65,6 @@ A program megfelelő mükődéséhez importálni kell a `phpMyAdmin` felületén
 A `phpMyAdmin` elérhető a `XAMPP` applikációban az `Admin` fülre kattintva.
 Az adatbázis importáláshoz szükséges sql script:
 https://github.com/norbert15/cost-tracker/blob/main/cost_tracker.sql
-
-A megfelelő mükődéshez futattni kell a következő command line parancsot:
-`composer install`
 
 A futtatáshoz szükséges command line parancs:
 `php -S localhost:8000 routing.php`, amelyet a projekt fő mappájában kell kiadni.
