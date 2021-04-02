@@ -14,6 +14,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
     } else if ($row["count"] != '0') {
         $_SESSION["email"] = $_POST['email'];
         $_SESSION["fullname"] = $row["fullname"];
+        $_SESSION["id"] = $row["id"];
         print(json_encode(array("status" => true)));
     }
 }

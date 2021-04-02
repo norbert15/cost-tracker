@@ -2,6 +2,9 @@
 Flight::map("cost_render", function () {
 
     require_once 'controller/profile/functions/expend-income-controller.php';
+    require_once 'controller/profile/functions/hun-date-controller.php';
+
+    $sql = CostIncomeModel::history($_SESSION['email'], $_SESSION["change_date"]);
 
     Flight::render("profile/cost/profile.php", array(
         "title" => "Költségkövető - Kiadások",
@@ -30,8 +33,11 @@ Flight::map("cost_render", function () {
         "expenditures" => $expenditures,
         "expenditures_sum" => $expenditures_sum,
         "expendPercent" => $expendPercent,
+        "res" => $sql,
+        "comment" => "Megjegyzés",
+        "ft" => "Ft.",
 
-        //*Toggleben lévő elemek
+        //*Tooolbarben lévő elemek
         "toggleExpend" => "Kiadások",
         "toggleRevenues" => "Bevételek",
         "toggleOverview" => "Áttekintés",

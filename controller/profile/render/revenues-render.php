@@ -2,6 +2,9 @@
 Flight::map("revenues_render", function () {
 
     require_once 'controller/profile/functions/expend-income-controller.php';
+    require_once 'controller/profile/functions/hun-date-controller.php';
+
+    $sql = CostIncomeModel::history_revenues($_SESSION['email'], $_SESSION["change_date"]);
 
     $set_class = "";
     if (($income_sum - $expenditures_sum) >= 0) {
@@ -32,6 +35,9 @@ Flight::map("revenues_render", function () {
         "incomes" => $incomes,
         "incomePercent" => $incomePercent,
         "expenditures_sum" => $expenditures_sum,
+        "res" => $sql,
+        "ft" => "Ft.",
+        "comment" => "Megjegyzés",
 
         //*Togglelévő elemek
         "toggleExpend" => "Kiadások",

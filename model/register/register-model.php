@@ -1,7 +1,7 @@
 <?php
 require_once '../../connect.php';
 
-class RegsiterModel
+class RegisterModel
 {
 
     //Email cím ellenőrése, hogy létezik-e már.

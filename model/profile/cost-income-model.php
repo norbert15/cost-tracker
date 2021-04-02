@@ -32,4 +32,32 @@ class CostIncomeModel
 
         return $res;
     }
+
+    //Az előzmények lekérdezése, költségek.
+    public static function history($email, $date)
+    {
+        $db = DBclass::getInstance();
+        $income = "income";
+        $etc = "etc";
+
+        $history_sql = "SELECT * FROM `history` WHERE name != '$income' AND name != '$etc' AND email = '$email' 
+        AND month_date LIKE '%$date%' ORDER BY `current_date` DESC";
+        $res = $db->query($history_sql);
+
+        return $res;
+    }
+
+    //Az előzmények lekérdezése, bevételek.
+    public static function history_revenues($email, $date)
+    {
+        $db = DBclass::getInstance();
+        $income = "income";
+        $etc = "etc";
+
+        $history_sql = "SELECT * FROM `history` WHERE (name = '$income' OR name = '$etc') AND  email = '$email' 
+        AND month_date LIKE '%$date%' ORDER BY `current_date` DESC";
+        $res = $db->query($history_sql);
+
+        return $res;
+    }
 }

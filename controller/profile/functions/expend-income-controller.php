@@ -80,10 +80,10 @@ $incomePercent = array("expend" => 0, "income" => 0);
 $ex_sum = $expenditures_sum;
 $in_sum = $income_sum;
 
-if($ex_sum > $in_sum){
+if ($ex_sum > $in_sum) {
     $incomePercent["income"] = ($in_sum / $ex_sum) * 100;
     $incomePercent["expend"] = 100 - $incomePercent["income"];
-}else if($in_sum > $ex_sum){
+} else if ($in_sum > $ex_sum) {
     $incomePercent["expend"] = ($ex_sum / $in_sum) * 100;
     $incomePercent["income"] = 100 - $incomePercent["expend"];
 }

@@ -1,97 +1,97 @@
 .toggle {
-  background: rgb(59, 59, 240);
-  height: 60px;
-  width: 100%;
+    background: rgb(59, 59, 240);
+    height: 60px;
+    width: 100%;
 }
 
 .toggle > i {
-  font-size: 40px;
-  margin-top: 10px;
-  margin-left: 10px;
-  color: white;
+    font-size: 40px;
+    margin-top: 10px;
+    margin-left: 10px;
+    color: white;
 }
 
 .other-page {
-  margin: 20px 20px 0 0;
+    margin: 20px 20px 0 0;
 }
 
 .other-page > small {
-  font-size: 15px;
-  color: white;
+    font-size: 15px;
+    color: white;
 }
 
 .material-icons {
-  margin: 5px;
+    margin: 5px;
 }
 
 small {
-  font-weight: bold;
-  font-size: 15px;
+    font-weight: bold;
+    font-size: 15px;
 }
 
 p {
-  font-size: 17px;
+    font-size: 17px;
 }
 
 a:link,
 a:visited {
-  text-decoration: none;
-  color: white;
+    text-decoration: none;
+    color: white;
 }
 
 /*Ikonok*/
 .div-transport > button {
-  background: orange;
+    background: orange;
 }
 
 .div-food > button {
-  background: dodgerblue;
+    background: dodgerblue;
 }
 
 .div-shopping > button {
-  background: #98786c;
+    background: #98786c;
 }
 
 .div-gift > button {
-  background: #ea7070;
+    background: #ea7070;
 }
 
 .div-health > button {
-  background: #77e70d;
+    background: #77e70d;
 }
 
 .div-family > button {
-  background: mediumpurple;
+    background: mediumpurple;
 }
 
 .div-sport > button {
-  background: brown;
+    background: brown;
 }
 
 .div-payment > button {
-  background: lightseagreen;
+    background: lightseagreen;
 }
 
 .div-etc > button {
-  background: #ea7070;
+    background: #ea7070;
 }
 
 button {
-  border-radius: 50% !important;
-  border: none;
-  height: 45px;
-  width: 50px;
-  color: white;
-  margin-top: 5px !important;
-  margin-right: 10px !important;
+    border-radius: 50% !important;
+    border: none;
+    height: 45px;
+    width: 50px;
+    color: white;
+    margin-top: 5px !important;
+    margin-right: 10px !important;
 }
 
 @media screen and (max-width: 331px) {
-  .home-icon {
-    visibility: hidden;
-  }
-  .other-page {
-    margin-left: -40px;
-    margin-right: 30px !important;
-  }
+    .home-icon {
+        visibility: hidden;
+    }
+    .other-page {
+        margin-left: -40px;
+        margin-right: 30px !important;
+    }
 }

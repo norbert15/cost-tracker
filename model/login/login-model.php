@@ -9,7 +9,7 @@ class LoginModel
     {
         $db = DBclass::getInstance();
 
-        $check_user = sprintf("SELECT COUNT(*) AS count, fullname FROM `users` WHERE `email` = '%s' 
+        $check_user = sprintf("SELECT COUNT(*) AS count, fullname, id FROM `users` WHERE `email` = '%s' 
             AND `password` = '%s'", $db->escape_string($email), $db->escape_string(md5($password)));
 
         $res = $db->query($check_user);

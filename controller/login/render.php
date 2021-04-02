@@ -12,6 +12,6 @@ Flight::map("login_render", function () {
         "loginText" => "Nincs fiókod?",
         "loginText2" => "Regisztrálj itt!",
         "successAlert" => "Sikeres regisztráció!",
-        "errorAlert" => "Sikertelen regisztráció!"
+        "errorAlert" => "Sikertelen bejelentkezés!"
     ));
 });

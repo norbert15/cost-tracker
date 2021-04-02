@@ -23,16 +23,29 @@ class AddModel
         $db->escape_string($sum);
 
         $update = "UPDATE `expenditures` SET $name = '$sum' WHERE `date` LIKE '%$date%' AND `email` = '$email'";
+
         return $db->query($update);
     }
 
     //Új hónap felvétele.
-    public static function insert($name, $sum, $email, $date)
+    public static function insert($name, $sum, $email, $id, $date)
     {
         $db = DBclass::getInstance();
         $db->escape_string($sum);
 
-        $insert = sprintf("INSERT INTO `expenditures` (`email`, $name , date) VALUES ('%s', '%d', '%s')", $email, $sum, $date);
+        $insert = sprintf("INSERT INTO `expenditures` (id, `email`, $name , date) VALUES ('%d', '%s', '%d', '%s')", $id, $email, $sum, $date);
+
+        return $db->query($insert);
+    }
+
+    //Előzmény felvétele
+    public static function history($id, $email, $name, $sum, $comment, $date)
+    {
+        $db = DBclass::getInstance();
+
+        $insert = sprintf("INSERT INTO `history`(id, `email`, `name`, `sum`, `comment`, month_date) 
+        VALUES ('%d','%s', '%s', '%d', '%s', '%s')", $id, $email, $name, $sum, $comment, $date);
+
         return $db->query($insert);
     }
 }

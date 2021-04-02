@@ -50,4 +50,41 @@ class Translate
 
         return $format['year'] . ' ' . $format['mon'];
     }
+
+    //Költségek fordítása.
+    public static function translateCost($cost)
+    {
+
+        switch ($cost) {
+            case 'transport':
+                $cost = 'Közlekedés';
+                break;
+            case 'shopping':
+                $cost = 'Vásárlás';
+                break;
+            case 'sport':
+                $cost = 'Szabadidő';
+                break;
+            case 'gift':
+                $cost = 'Ajandék';
+                break;
+            case 'health':
+                $cost = 'Egészségügy';
+                break;
+            case 'food':
+                $cost = 'Élelmiszer';
+                break;
+            case 'family':
+                $cost = 'Család';
+                break;
+            case 'income':
+                $cost = 'Fizetés';
+                break;
+            case 'etc':
+                $cost = 'Egyéb bevétel';
+                break;
+        }
+
+        return $cost;
+    }
 }

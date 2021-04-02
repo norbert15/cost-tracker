@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2020. Dec 09. 16:48
--- Kiszolgáló verziója: 10.4.14-MariaDB
--- PHP verzió: 7.4.11
+-- Létrehozás ideje: 2021. Jan 20. 18:42
+-- Kiszolgáló verziója: 10.4.17-MariaDB
+-- PHP verzió: 7.4.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,8 +28,9 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `expenditures` (
+  `id` int(11) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `transport` int(30) NOT NULL,
+  `transport` int(11) NOT NULL,
   `food` int(11) NOT NULL,
   `shopping` int(11) NOT NULL,
   `gift` int(11) NOT NULL,
@@ -45,7 +46,21 @@ CREATE TABLE `expenditures` (
 -- A tábla adatainak kiíratása `expenditures`
 --
 
+-- --------------------------------------------------------
 
+--
+-- Tábla szerkezet ehhez a táblához `history`
+--
+
+CREATE TABLE `history` (
+  `id` int(11) NOT NULL,
+  `email` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
+  `name` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
+  `sum` int(11) NOT NULL,
+  `comment` mediumtext COLLATE utf8_hungarian_ci NOT NULL,
+  `current_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `month_date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
 
 -- --------------------------------------------------------
 
@@ -65,11 +80,21 @@ CREATE TABLE `users` (
 -- A tábla adatainak kiíratása `users`
 --
 
-
-
 --
 -- Indexek a kiírt táblákhoz
 --
+
+--
+-- A tábla indexei `expenditures`
+--
+ALTER TABLE `expenditures`
+  ADD KEY `id` (`id`);
+
+--
+-- A tábla indexei `history`
+--
+ALTER TABLE `history`
+  ADD KEY `history` (`id`);
 
 --
 -- A tábla indexei `users`
@@ -85,7 +110,23 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT a táblához `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- Megkötések a kiírt táblákhoz
+--
+
+--
+-- Megkötések a táblához `expenditures`
+--
+ALTER TABLE `expenditures`
+  ADD CONSTRAINT `id` FOREIGN KEY (`id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Megkötések a táblához `history`
+--
+ALTER TABLE `history`
+  ADD CONSTRAINT `history` FOREIGN KEY (`id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

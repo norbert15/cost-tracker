@@ -1,78 +1,83 @@
 .toggle {
-  background: rgb(59, 59, 240);
-  display: flex;
-  justify-content: space-between;
-  height: 60px;
-  width: 100%;
+    background: rgb(59, 59, 240);
+    display: flex;
+    justify-content: space-between;
+    height: 60px;
+    width: 100%;
 }
 
 .categoria {
-  color: white;
-  margin-left: -250px;
+    color: white;
+    margin-left: -250px;
 }
 
 .categoria > a {
-  font-size: 16px;
-  margin-right: 5px;
-  margin-left: 5px;
+    font-size: 16px;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.main-title {
+    background: rgb(59, 59, 240);
+    color: aliceblue;
 }
 
 .user {
-  margin-top: 12px;
-  margin-left: 10px;
-  color: white;
-  font-size: 20px;
-  display: inline-flex;
+    margin-top: 12px;
+    margin-left: 10px;
+    color: white;
+    font-size: 20px;
+    display: inline-flex;
 }
 
 .user > i {
-  font-size: 35px;
-  margin-right: 10px;
+    font-size: 35px;
+    margin-right: 10px;
 }
 
 a:link,
 a:visited {
-  text-decoration: none;
-  color: white;
+    text-decoration: none;
+    color: white;
 }
 
 a.disabled {
-  pointer-events: none;
-  cursor: default;
+    pointer-events: none;
+    cursor: default;
 }
 
 @media screen and (max-width: 1000px) {
-  .user-name {
-    visibility: hidden;
-  }
+    .user-name {
+        visibility: hidden;
+    }
 }
 
 @media screen and (max-width: 590px) {
-  .user-icon {
-    visibility: hidden;
-  }
-  .categoria {
-    margin-left: -240px;
-  }
+    .user-icon {
+        visibility: hidden;
+    }
+    .categoria {
+        margin-left: -240px;
+    }
 }
 
 @media screen and (max-width: 482px) {
-  .toggle {
-    height: 80px;
-  }
-  .hide-first {
-    visibility: hidden;
-  }
-  .categoria {
-    margin-left: -238px;
-  }
+    .toggle {
+        height: 80px;
+    }
+    .hide-first {
+        visibility: hidden;
+    }
+    .categoria {
+        margin-left: -238px;
+    }
 }
 
 @media screen and (max-width: 360px) {
-  .hide-first {
-    visibility: visible;
-  }
-  .hide-last {
-    visibility: hidden;
-  }
+    .hide-first {
+        visibility: visible;
+    }
+    .hide-last {
+        visibility: hidden;
+    }
 }
